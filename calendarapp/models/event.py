@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from django.db import models
 from calendarapp.models import EventAbstract
 from authentication.models import CustomUser
@@ -16,8 +16,8 @@ class EventManager(models.Manager):
             user=user,
             is_active=True,
             is_deleted=False,
-            end_time__gte=datetime.now(),
-            start_time__lte = datetime.now()
+            end_time__gte=datetime.now() + timedelta(hours=5, minutes=30),
+            start_time__lte = datetime.now() + + timedelta(hours=5, minutes=30)
         ).order_by("start_time")
         return running_events
     
@@ -27,7 +27,7 @@ class EventManager(models.Manager):
             user=user,
             is_active=True,
             is_deleted=False,
-            end_time__lt=datetime.now(),
+            end_time__lt=datetime.now() + timedelta(hours=5, minutes=30),
         )
         return completed_events
     
@@ -36,7 +36,7 @@ class EventManager(models.Manager):
             user=user,
             is_active=True,
             is_deleted=False,
-            start_time__gt=datetime.now(),
+            start_time__gt=datetime.now() + timedelta(hours=5, minutes=30),
         )
         return upcoming_events
 
