@@ -17,7 +17,7 @@ class EventManager(models.Manager):
             is_active=True,
             is_deleted=False,
             end_time__gte=datetime.now() + timedelta(hours=5, minutes=30),
-            start_time__lte = datetime.now() + + timedelta(hours=5, minutes=30)
+            start_time__lte = datetime.now() + timedelta(hours=5, minutes=30)
         ).order_by("start_time")
         return running_events
     
