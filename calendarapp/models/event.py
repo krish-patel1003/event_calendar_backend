@@ -22,7 +22,6 @@ class EventManager(models.Manager):
         return running_events
     
     def get_completed_events(self, user):
-        print(user)
         completed_events = Event.objects.filter(
             user=user,
             is_active=True,

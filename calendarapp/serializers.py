@@ -20,9 +20,6 @@ class EventSerializer(serializers.ModelSerializer):
         title = attrs.get('title', None)
         start_time = attrs.get('start_time', None)
         end_time = attrs.get('end_time', None)
-
-        if title and (not title.isalnum()):
-            raise serializers.ValidationError("title should be alphanumeric")
         
         if start_time and end_time and start_time > end_time:
             raise serializers.ValidationError(
