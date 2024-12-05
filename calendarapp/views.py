@@ -70,6 +70,7 @@ class EventAPIView(ModelViewSet):
     
     @action(detail=False, methods=["GET"], name="running_events")
     def running_events(self, request, *args, **kwargs):
+        print(CURRENT_DATETIME_STR)
         serializer_data = self.serializer_class(Event.objects.get_running_events(user=request.user), many=True)
         return Response(serializer_data.data, status=status.HTTP_200_OK)
     
